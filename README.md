@@ -6,7 +6,7 @@ Welcome to the Blackjack Game project! This is a simple implementation of the cl
 
 - Play a game of Blackjack against the computer dealer.
 - Implement basic Blackjack rules, including hitting and standing.
-- Calculate and display player and dealer hand values.
+- Calculate and display player hand values.
 - Handle scenarios such as busting and determining the winner.
   ### Blackjack Rules
 
@@ -36,7 +36,7 @@ Welcome to the Blackjack Game project! This is a simple implementation of the cl
 
 1. Clone the repository to your local machine using `git clone https://github.com/your-username/blackjack-game.git`.
 
-2. Open the project in your favorite Java development environment (e.g., Eclipse, IntelliJ).
+2. Open the project in Android Studio Integrated Development Environment (IDE).
 
 3. Run the `BlackjackGame.java` class to start the game.
 
