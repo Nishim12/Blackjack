@@ -15,16 +15,15 @@ public class MainActivity3 extends AppCompatActivity {
         Button yesButton = findViewById(R.id.yesButton);
         Button noButton = findViewById(R.id.noButton);
 
+            /**If the player clicks on yes button than he is re-directed to MainActivity*/
             yesButton.setOnClickListener(v -> {
-                // User clicked on "Yes" button, navigate to MainActivity
                 Intent intent = new Intent(MainActivity3.this, MainActivity.class);
                 startActivity(intent);
             });
 
+            /**If the user clicks on No button than the player exits the app*/
             noButton.setOnClickListener(v -> {
-                // User clicked on "No" button, close the app
                 finishAffinity();
             });
         }
-
     }

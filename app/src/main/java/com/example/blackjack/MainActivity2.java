@@ -31,16 +31,18 @@ public class MainActivity2 extends AppCompatActivity {
     TextView moneyRealTime;
     int moneyInvested;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        //Retrieve the money the player has saved locally in his device.
         money = retrieveMoneyFromSharedPreferences();
         moneyRealTime = findViewById(R.id.textView10);
         moneyInvested = getIntent().getIntExtra("money_invested", 0);
         money = money - moneyInvested;
+
+        //Displays the current money the player has
         moneyRealTime.setText(String.valueOf(money));
 
         ArrayList<Integer> player = new ArrayList<>();
@@ -59,33 +61,42 @@ public class MainActivity2 extends AppCompatActivity {
         A_player_no=0;
         cards.add(player);
         cards.add(dealer);
+
+        //Displays the card that the user and the dealer got on screen.
         cardsDisplayer(cards.get(0).get(0), 4);
         cardsDisplayer(cards.get(0).get(1), 3);
         cardsDisplayer(cards.get(1).get(0), 10);
         ImageView myImageView = findViewById(R.id.imageView9);
         myImageView.setImageResource(R.drawable.card_back_side);
 
+        //Caculates initial points of player
         points[0] = PointSystem.CalculatePoints(cards, 0);
         TextView pointsPlayer = findViewById(R.id.textView5);
+
+        //Sets the total initial points of player.
         if(checkA(0)) {
             pointsPlayer.setText(String.valueOf(points[0])+" / "+String.valueOf(points[0]-11+1));
         }
         else{
             pointsPlayer.setText(String.valueOf(points[0]));
         }
+
         points[1] = PointSystem.CalculatePoints(cards, 1);
         turnNo = 1;
         dealerTurnNo = 1;
 
         ImageView imageView14 = findViewById(R.id.imageView14);
+        /*This inner class is executed when the player clicks the Hits image.
+         * First generates random card using my random Number Generator class written by.
+         * Then displays that image on the User-Interface*/
         imageView14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (gameStatus == 0) {
-                    // Generate a random card for the player and add it to the player's hand
+                    // Generate a random card for the player and add it to the player's hand.
                     cards.get(0).add(randomNumberGenerator.randomNumber());
 
-                    // Update the player's hand display
+                    // Update the player's hand display.
                     if (turnNo == 1) {
                         cardsDisplayer(cards.get(0).get(2), 2);
                     } else if (turnNo == 2) {
@@ -96,9 +107,9 @@ public class MainActivity2 extends AppCompatActivity {
                         cardsDisplayer(cards.get(0).get(5), 6);
                     }
 
-                    // Calculate the new points for the player and update the TextView
                     points[0] = PointSystem.CalculatePoints(cards, 0);
                     TextView pointsPlayer = findViewById(R.id.textView5);
+
                     if(checkA(0) && points[0]<=21) {
                         pointsPlayer.setText(String.valueOf(points[0])+" / "+String.valueOf(points[0]-11+1));
                     }
@@ -108,8 +119,9 @@ public class MainActivity2 extends AppCompatActivity {
                     else{
                         pointsPlayer.setText(String.valueOf(points[0]));
                     }
-
                     turnNo++;
+
+                    //Checks if the points are not exceeding 21.
                     if (!check(0) && (checkA(0)==false || (checkA(0)==true && (points[0]-11+1)>21))) {
                         TextView status = findViewById(R.id.TextView);
                         status.setText("Bust");
@@ -123,6 +135,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         A_no=0;
         ImageView imageView15 = findViewById(R.id.imageView15);
+        /*Updates the points of Player
+         * Than displays the cards for the dealer*/
         imageView15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,13 +180,15 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         }
 
-                  // Check the result after the dealer's turn
+                  // Check the result after the dealer's turn.
                   checkResult();
                 }
         });
 
     }
 
+    /**Checks the player points and informs the player whether he won,draw or lost.
+     * Than goes to the next Activity MainActivity3*/
     private void checkResult() {
         int playerPoints = PointSystem.CalculatePoints(cards,0);
 
@@ -207,11 +223,16 @@ public class MainActivity2 extends AppCompatActivity {
         navigateToMainActivity3();
     }
 
+    /**Stores the total money and stores it on the local storage of the application
+     * Returns:Total money of player*/
     private int retrieveMoneyFromSharedPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_MONEY, 2000); // Default value is 2000 if not found
     }
 
+    /**Displays the right card based on input
+     * Params:randomNumber-Is the random playing card
+     *       imagePosition- Tells what image id to display on the UI*/
     public void cardsDisplayer(int randomNumber, int imagePosition) {
         int[] cardsDisplay = {
                 R.drawable.clubs_ace, R.drawable.clubs2, R.drawable.clubs3, R.drawable.clubs4,
@@ -286,7 +307,9 @@ public class MainActivity2 extends AppCompatActivity {
         int drawableResourceId = cardsDisplay[randomNumber];
         imageView.setImageResource(drawableResourceId);
     }
-
+    /**Checks if the sum of points are not crossing 21
+     * Params : whichPlayer-Whether it is dealer(1 for dealer) or player(0 for player)
+     * Returns:true if points are less than 21 or else false*/
     public boolean check(int whichPlayer){
         if(points[whichPlayer]>21){
             return false;
@@ -294,6 +317,8 @@ public class MainActivity2 extends AppCompatActivity {
         return true;
     }
 
+    /**Saves money to the local storage of the device
+     * Params:money-The final money of the player after game*/
     private void saveMoneyToSharedPreferences(int money) {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -301,6 +326,9 @@ public class MainActivity2 extends AppCompatActivity {
         editor.apply();
     }
 
+    /**Checks if the amongst the random cards there is an ace
+     * Params:playerOrDealer-Whether it is player(0 for player) or dealer's card(1 for dealer)
+     * Returns:true if an ace is present and false otherwise*/
     public boolean checkA(int playerOrDealer){
         for(int i=0;i<cards.get(0).size(); i++){
             if(cards.get(playerOrDealer).get(i)==0 || cards.get(playerOrDealer).get(i)==13 || cards.get(playerOrDealer).get(i)==26 || cards.get(playerOrDealer).get(i)==39){
@@ -310,6 +338,7 @@ public class MainActivity2 extends AppCompatActivity {
         return false;
     }
 
+    /**To go the next Activity which is MainActivity3 after a delay of 3 seconds*/
     public void navigateToMainActivity3(){
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -318,7 +347,6 @@ public class MainActivity2 extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
                 startActivity(intent);
             }
-            // 2000 milliseconds delay
         }, 3000);
     }
 }

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class PointSystem {
     static int A;
+    /**Calculates the total points of dealer or player.
+     * Params:cardsStore-Double dimensional arrayList that contains all the cards
+     *                   of player and dealer.
+     *        playerOrDealer-Whether it is a player(0 for player) or dealer(1 for dealer).
+     *Return:Returns the points of the respective dealer or player.*/
     public static int CalculatePoints(ArrayList<ArrayList<Integer>> cardsStore,int playerOrDealer){
         int points=0;
         A=0;
