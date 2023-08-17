@@ -1,36 +1,46 @@
 # Blackjack Game
 
 Welcome to the Blackjack Game project! This is a simple implementation of the classic card game Blackjack, where players attempt to beat the dealer by getting a hand value as close to 21 as possible without exceeding it.
+## My App UI
 
-## Features
+<div style="display: flex; justify-content: space-between;">
+    <img src="app/src/main/res/drawable/first_page.png" alt="Image 1" width="23%">
+    <img src="app/src/main/res/drawable/second_page.png" alt="Image 2" width="23%">
+    <img src="app/src/main/res/drawable/third_page.png" alt="Image 3" width="23%">
+    <img src="app/src/main/res/drawable/fourth_page.png" alt="Image 4" width="23%">
+</div>
 
-- Play a game of Blackjack against the computer dealer.
-- Implement basic Blackjack rules, including hitting and standing.
-- Calculate and display player hand values.
-- Handle scenarios such as busting and determining the winner.
-  ### Blackjack Rules
+### Blackjack Rules
+Welcome to Blackjack! Your goal is to reach a hand value close to 21 without exceeding it. Here's a quick guide:
 
-1. The goal of Blackjack is to have a hand value as close to 21 as possible without exceeding it.
+1. **Investment:**
+   - Start by betting a virtual amount.
 
-2. Each player is dealt two cards initially, both face-up. The dealer also receives two cards, with one face-up and one face-down.
+2. **Dealing Cards:**
+   - Press "Deal" to get started.
+   - You and the dealer receive two cards each.
 
-3. Cards 2 through 10 are worth their face value. Face cards (Jack, Queen, King) are worth 10 points each, and the Ace can be worth 1 or 11 points, depending on which value benefits the hand more.
+3. **Player's Move:**
+   - Decide whether to "stand" or "hit" based on your cards.
 
-4. Players can choose to "hit" or "stand." "Hit" means drawing another card to improve the hand's total value. "Stand" means keeping the current hand value and passing the turn to the dealer.
+4. **Dealer's Move:**
+   - If you stand, dealer's face-down card is revealed.
+   - If you hit, dealer's cards remain hidden.
 
-5. Players can continue hitting until they decide to stand or their hand value exceeds 21, resulting in a "bust."
+5. **Determining the Winner:**
+   - Closest to 21 wins without busting.
+   - If both tied, it's a push.
+     
+6. **Blackjack:**
+   - Ace and 10-point card is Blackjack, usually winning.
 
-6. After players have made their decisions, the dealer reveals their face-down card.
+7. **Play More Rounds:**
+   - Keep playing with new rounds.
 
-7. The dealer must hit until their hand value is 17 or higher. If the dealer's hand exceeds 21, they bust.
+8. **Exit:**
+   - End the game when you're ready.
 
-8. The winner is determined by comparing hand values. The player with a hand value closest to 21 without exceeding it wins. If the player and dealer have the same hand value, it's a tie.
-
-9. If a player's initial two cards are an Ace and a 10-point card (10, Jack, Queen, King), they have a "Blackjack" and win automatically, unless the dealer also has a Blackjack.
-
-10. A round ends when the player wins, loses, ties, or surrenders.
-
-11. The game continues with additional rounds, allowing players to make strategic decisions based on their cards and the dealer's visible card.
+Remember, Blackjack is about strategic decisions. Good luck!
 
 ## How to Play
 
